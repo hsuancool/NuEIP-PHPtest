@@ -22,7 +22,9 @@ class AccountInfoController extends Controller
 
     public function list(Request $request)
     {
-        // TODO: list account
+        $accounts = $this->account_info_service->getValidAccounts();
+
+        return $this->responseSuccessJsonWithFormat($accounts);
     }
 
     public function create(Request $request)
