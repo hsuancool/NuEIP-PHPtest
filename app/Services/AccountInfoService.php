@@ -12,4 +12,9 @@ class AccountInfoService
     {
         $this->account_info_repo = $account_info_repo;
     }
+
+    public function getValidAccounts()
+    {
+        return $this->account_info_repo->getValid()->toArray();
+    }
 }
