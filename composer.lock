@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "01cb26f90d2ee10418c89db08bc9d97d",
+    "content-hash": "4d00d6509a07e122bdefc1129d8779ba",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1039,6 +1039,72 @@
                 "storage"
             ],
             "time": "2020-02-05T18:14:17+00:00"
+        },
+        {
+            "name": "marc-mabe/php-enum",
+            "version": "v4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marc-mabe/php-enum.git",
+                "reference": "e6113cfec06ae1a6580812f4ea442fa696330988"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marc-mabe/php-enum/zipball/e6113cfec06ae1a6580812f4ea442fa696330988",
+                "reference": "e6113cfec06ae1a6580812f4ea442fa696330988",
+                "shasum": ""
+            },
+            "require": {
+                "ext-reflection": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpbench/phpbench": "^0.16.1",
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev",
+                    "dev-3.x": "3.1-dev",
+                    "dev-2.x": "2.3-dev",
+                    "dev-1.x": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MabeEnum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Bennewitz",
+                    "email": "dev@mabe.berlin",
+                    "homepage": "http://mabe.berlin/",
+                    "role": "Lead"
+                }
+            ],
+            "description": "Simple and fast implementation of enumerations with native PHP",
+            "homepage": "https://github.com/marc-mabe/php-enum",
+            "keywords": [
+                "enum",
+                "enum-map",
+                "enum-set",
+                "enumeration",
+                "enumerator",
+                "enummap",
+                "enumset",
+                "map",
+                "set",
+                "type",
+                "type-hint",
+                "typehint"
+            ],
+            "time": "2019-12-18T09:03:05+00:00"
         },
         {
             "name": "monolog/monolog",
