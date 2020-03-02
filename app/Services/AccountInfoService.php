@@ -3,13 +3,14 @@
 namespace App\Services;
 
 use App\ParameterBag\CreateAccountInfoParameterBag;
-use App\Repositories\AccountInfoRepository;
+use App\Repositories\AccountInfoRepositoryInterface;
+use Illuminate\Database\QueryException;
 
 class AccountInfoService
 {
     protected $account_info_repo;
 
-    public function __construct(AccountInfoRepository $account_info_repo)
+    public function __construct(AccountInfoRepositoryInterface $account_info_repo)
     {
         $this->account_info_repo = $account_info_repo;
     }
