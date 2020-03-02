@@ -27,9 +27,29 @@ class AccountInfoController extends Controller
         return $this->responseSuccessJsonWithFormat($accounts);
     }
 
+    /**
+     * Create account info
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(Request $request)
     {
-        // TODO: create account
+        DB::beginTransaction();
+
+        try {
+            $parameters = CreateAccountInfoParameterBag::createFromRequest($request);
+            $parameters->validate();
+
+            $account = $this->account_info_service->createAccountByParameters($parameters);
+        } catch (ParameterBagValidationException $e) {
+            DB::rollBack();
+            return $this->responseFailedJsonWithFormat(Response::HTTP_BAD_REQUEST, 'Missing required request parameters');
+        }
+
+        DB::commit();
+
+        return $this->responseSuccessJsonWithFormat($account);
     }
 
     public function update(Request $request)
