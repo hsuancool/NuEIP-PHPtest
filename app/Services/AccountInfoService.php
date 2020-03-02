@@ -14,6 +14,11 @@ class AccountInfoService
         $this->account_info_repo = $account_info_repo;
     }
 
+    /**
+     * Get valid accounts
+     *
+     * @return array
+     */
     public function getValidAccounts()
     {
         return $this->account_info_repo->getValid()->toArray();
@@ -21,7 +26,7 @@ class AccountInfoService
 
     /**
      * Create account by CreateAccountInfoParameterBag
-     * 
+     *
      * @param CreateAccountInfoParameterBag $parameters
      * @return array
      */
