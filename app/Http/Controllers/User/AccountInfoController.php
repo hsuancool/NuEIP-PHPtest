@@ -58,23 +58,16 @@ class AccountInfoController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function create(Request $request)
     {
         DB::beginTransaction();
 
-        try {
-            $parameters = CreateAccountInfoParameterBag::createFromRequest($request);
-            $parameters->validate();
+        $parameters = CreateAccountInfoParameterBag::createFromRequest($request);
+        $parameters->validate();
 
-            $account = $this->account_info_service->createAccountByParameters($parameters);
-        } catch (ParameterBagValidationException $e) {
-            DB::rollBack();
-            return $this->responseFailedJsonWithFormat(Response::HTTP_BAD_REQUEST, 'Missing required request parameters');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return $this->responseFailedJsonWithFormat(Response::HTTP_BAD_REQUEST, 'Duplicate account/email');
-        }
+        $account = $this->account_info_service->createAccountByParameters($parameters);
 
         DB::commit();
 
