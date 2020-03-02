@@ -65,6 +65,9 @@ class AccountInfoController extends Controller
         } catch (ParameterBagValidationException $e) {
             DB::rollBack();
             return $this->responseFailedJsonWithFormat(Response::HTTP_BAD_REQUEST, 'Missing required request parameters');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->responseFailedJsonWithFormat(Response::HTTP_BAD_REQUEST, 'Duplicate account/email');
         }
 
         DB::commit();

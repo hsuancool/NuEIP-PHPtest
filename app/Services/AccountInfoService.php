@@ -29,9 +29,17 @@ class AccountInfoService
      *
      * @param CreateAccountInfoParameterBag $parameters
      * @return array
+     *
+     * @throws \Exception
      */
     public function createAccountByParameters(CreateAccountInfoParameterBag $parameters)
     {
-        return $this->account_info_repo->createByParameters($parameters)->toArray();
+        try {
+            $account = $this->account_info_repo->createByParameters($parameters)->toArray();
+        } catch (QueryException $e) {
+            throw new \Exception($e->getMessage());
+        }
+
+        return $account;
     }
 }
