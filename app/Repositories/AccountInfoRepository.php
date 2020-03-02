@@ -16,6 +16,17 @@ class AccountInfoRepository implements AccountInfoRepositoryInterface
     }
 
     /**
+     * Get valid account info by id
+     *
+     * @return AccountInfo
+     */
+    public function getValidOneById(int $id)
+    {
+        return $this->account_info
+            ->find($id);
+    }
+
+    /**
      * Get valid account info
      *
      * @return AccountInfo[]

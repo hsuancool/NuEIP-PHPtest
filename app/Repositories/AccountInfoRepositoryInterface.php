@@ -8,6 +8,12 @@ use App\ParameterBag\CreateAccountInfoParameterBag;
 interface AccountInfoRepositoryInterface
 {
     /**
+     * @param int $id
+     * @return AccountInfo
+     */
+    public function getValidOneById(int $id);
+
+    /**
      * @return AccountInfo[]
      */
     public function getValid();
