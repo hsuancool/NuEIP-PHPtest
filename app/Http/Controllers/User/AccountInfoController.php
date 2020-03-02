@@ -89,4 +89,21 @@ class AccountInfoController extends Controller
 
         return $this->responseSuccessJsonWithFormat($account);
     }
+
+    /**
+     * Delete account info by account id
+     *
+     * @param int $account_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete(int $account_id)
+    {
+        DB::beginTransaction();
+
+        $this->account_info_service->deleteValidById($account_id);
+
+        DB::commit();
+
+        return $this->responseSuccessJsonWithFormat([]);
+    }
 }
