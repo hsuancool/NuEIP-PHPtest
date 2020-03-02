@@ -5,7 +5,7 @@ namespace App\Exceptions;
 class CreateAccountInfoFailedException extends \InvalidArgumentException
 {
     /**
-     * AccountInfoNotFoundException constructor.
+     * CreateAccountInfoFailedException constructor.
      *
      * @param string $message
      */
