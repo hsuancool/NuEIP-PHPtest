@@ -16,6 +16,16 @@ class AccountInfoService
     }
 
     /**
+     * Get valid account by id
+     *
+     * @return array
+     */
+    public function getValidAccountById(int $id)
+    {
+        return $this->account_info_repo->getValidOneById($id)->toArray();
+    }
+
+    /**
      * Get valid accounts
      *
      * @return array
