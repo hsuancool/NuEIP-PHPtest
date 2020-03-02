@@ -62,6 +62,8 @@ class Handler extends ExceptionHandler
                 return ResponseFormatHelper::responseFailedJson(Response::HTTP_BAD_REQUEST, $exception->getMessage());
             case $exception instanceof UpdateAccountInfoFailedException:
                 return ResponseFormatHelper::responseFailedJson(Response::HTTP_BAD_REQUEST, $exception->getMessage());
+            case $exception instanceof DeleteAccountInfoFailedException:
+                return ResponseFormatHelper::responseFailedJson(Response::HTTP_BAD_REQUEST, $exception->getMessage());
             case $exception instanceof ParameterBagValidationException:
                 return ResponseFormatHelper::responseFailedJson(Response::HTTP_BAD_REQUEST, $exception->getMessage());
             default:
