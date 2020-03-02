@@ -2,24 +2,44 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Exceptions\ParameterBagValidationException;
 use App\Http\Controllers\Controller;
+use App\ParameterBag\CreateAccountInfoParameterBag;
 use App\Services\AccountInfoService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class AccountInfoController extends Controller
 {
     protected $account_info_service;
 
+    /**
+     * AccountInfoController constructor.
+     * @param AccountInfoService $account_info_service
+     */
     public function __construct(AccountInfoService $account_info_service)
     {
         $this->account_info_service = $account_info_service;
     }
 
+    /**
+     * Show account info by account
+     *
+     * @param string $account
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show(string $account)
     {
         // TODO: show account info
     }
 
+    /**
+     * List valid account info
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function list(Request $request)
     {
         $accounts = $this->account_info_service->getValidAccounts();
@@ -52,6 +72,12 @@ class AccountInfoController extends Controller
         return $this->responseSuccessJsonWithFormat($account);
     }
 
+    /**
+     * Update account info
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Request $request)
     {
         // TODO: update account
