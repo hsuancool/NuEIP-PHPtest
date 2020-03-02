@@ -26,7 +26,11 @@ class AccountInfoService
      */
     public function getValidAccountById(int $id)
     {
-        return $this->account_info_repo->getValidOneById($id)->toArray();
+        if (!$account = $this->account_info_repo->getValidOneById($id)) {
+            throw new AccountInfoNotFoundException();
+        }
+
+        return $account->toArray();
     }
 
     /**
