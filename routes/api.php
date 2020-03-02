@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/nueip/accounts/{accountId}', 'User\AccountInfoController@show');
 Route::get('/nueip/accounts', 'User\AccountInfoController@list');
 Route::post('/nueip/accounts', 'User\AccountInfoController@create');

@@ -26,12 +26,18 @@ class AccountInfoController extends Controller
     /**
      * Show account info by account
      *
-     * @param string $account
+     * @param int $account_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(string $account)
+    public function show(int $account_id)
     {
-        // TODO: show account info
+        $account = $this->account_info_service->getValidAccountById($account_id);
+
+        if (!$account) {
+            return $this->responseFailedJsonWithFormat(Response::HTTP_NOT_FOUND, 'Account not found');
+        }
+
+        return $this->responseSuccessJsonWithFormat($account);
     }
 
     /**
