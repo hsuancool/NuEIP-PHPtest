@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
+use App\Exceptions\AccountInfoNotFoundException;
 use App\Exceptions\CreateAccountInfoFailedException;
+use App\Exceptions\UpdateAccountInfoFailedException;
 use App\ParameterBag\CreateAccountInfoParameterBag;
+use App\ParameterBag\UpdateAccountInfoParameterBag;
 use App\Repositories\AccountInfoRepositoryInterface;
 use Illuminate\Database\QueryException;
 
@@ -50,6 +53,28 @@ class AccountInfoService
             $account = $this->account_info_repo->createByParameters($parameters)->toArray();
         } catch (QueryException $e) {
             throw new CreateAccountInfoFailedException();
+        }
+
+        return $account;
+    }
+
+    /**
+     * Update account by UpdateAccountInfoParameterBag
+     *
+     * @param int $account_id
+     * @param UpdateAccountInfoParameterBag $parameters
+     * @return array
+     */
+    public function updateAccountByParameters(int $account_id, UpdateAccountInfoParameterBag $parameters)
+    {
+        if (!$account_info = $this->account_info_repo->getValidOneById($account_id)) {
+            throw new AccountInfoNotFoundException();
+        }
+
+        try {
+            $account = $this->account_info_repo->updateByParameters($account_info, $parameters)->toArray();
+        } catch (QueryException $e) {
+            throw new UpdateAccountInfoFailedException($e->getMessage());
         }
 
         return $account;
