@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\ParameterBag\CreateAccountInfoParameterBag;
 use App\Repositories\AccountInfoRepository;
 
 class AccountInfoService
@@ -16,5 +17,16 @@ class AccountInfoService
     public function getValidAccounts()
     {
         return $this->account_info_repo->getValid()->toArray();
+    }
+
+    /**
+     * Create account by CreateAccountInfoParameterBag
+     * 
+     * @param CreateAccountInfoParameterBag $parameters
+     * @return array
+     */
+    public function createAccountByParameters(CreateAccountInfoParameterBag $parameters)
+    {
+        return $this->account_info_repo->createByParameters($parameters)->toArray();
     }
 }
