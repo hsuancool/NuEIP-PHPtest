@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\AccountInfo;
 use App\ParameterBag\AccountInfoParam;
 use App\ParameterBag\CreateAccountInfoParameterBag;
+use App\ParameterBag\UpdateAccountInfoParameterBag;
 
 class AccountInfoRepository implements AccountInfoRepositoryInterface
 {
@@ -53,6 +54,36 @@ class AccountInfoRepository implements AccountInfoRepositoryInterface
         $account->birth = $parameters->get(AccountInfoParam::BIRTH);
         $account->email = $parameters->get(AccountInfoParam::EMAIL);
         $account->message = $parameters->get(AccountInfoParam::MESSAGE);
+        $account->save();
+
+        return $account;
+    }
+
+    /**
+     * Update account info by parameters
+     *
+     * @param AccountInfo $account
+     * @param UpdateAccountInfoParameterBag $parameters
+     * @return AccountInfo
+     */
+    public function updateByParameters(AccountInfo $account, UpdateAccountInfoParameterBag $parameters)
+    {
+        if ($parameters->has(AccountInfoParam::NAME)) {
+            $account->name = $parameters->get(AccountInfoParam::NAME);
+        }
+        if ($parameters->has(AccountInfoParam::GENDER)) {
+            $account->gender = $parameters->get(AccountInfoParam::GENDER);
+        }
+        if ($parameters->has(AccountInfoParam::BIRTH)) {
+            $account->birth = $parameters->get(AccountInfoParam::BIRTH);
+        }
+        if ($parameters->has(AccountInfoParam::EMAIL)) {
+            $account->email = $parameters->get(AccountInfoParam::EMAIL);
+        }
+        if ($parameters->has(AccountInfoParam::MESSAGE)) {
+            $account->message = $parameters->get(AccountInfoParam::MESSAGE);
+        }
+
         $account->save();
 
         return $account;

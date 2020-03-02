@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\AccountInfo;
 use App\ParameterBag\CreateAccountInfoParameterBag;
+use App\ParameterBag\UpdateAccountInfoParameterBag;
 
 interface AccountInfoRepositoryInterface
 {
@@ -23,4 +24,11 @@ interface AccountInfoRepositoryInterface
      * @return AccountInfo
      */
     public function createByParameters(CreateAccountInfoParameterBag $parameters);
+
+    /**
+     * @param AccountInfo $account
+     * @param UpdateAccountInfoParameterBag $parameters
+     * @return AccountInfo
+     */
+    public function updateByParameters(AccountInfo $account, UpdateAccountInfoParameterBag $parameters);
 }
