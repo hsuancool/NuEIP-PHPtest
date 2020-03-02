@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Exceptions\ParameterBagValidationException;
 use App\Http\Controllers\Controller;
 use App\ParameterBag\CreateAccountInfoParameterBag;
+use App\ParameterBag\UpdateAccountInfoParameterBag;
 use App\Services\AccountInfoService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -77,11 +78,21 @@ class AccountInfoController extends Controller
     /**
      * Update account info
      *
+     * @param int $account_id
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request)
+    public function update(int $account_id, Request $request)
     {
-        // TODO: update account
+        DB::beginTransaction();
+
+        $parameters = UpdateAccountInfoParameterBag::createFromRequest($request);
+        $parameters->validate();
+
+        $account = $this->account_info_service->updateAccountByParameters($account_id, $parameters);
+
+        DB::commit();
+
+        return $this->responseSuccessJsonWithFormat($account);
     }
 }
