@@ -2,7 +2,6 @@
 
 namespace App\ParameterBag;
 
-use App\Enum\AccountInfoParam;
 use Illuminate\Http\Request;
 
 /**
