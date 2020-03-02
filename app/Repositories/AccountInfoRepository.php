@@ -14,6 +14,11 @@ class AccountInfoRepository implements AccountInfoRepositoryInterface
         $this->account_info = $account_info;
     }
 
+    /**
+     * Get valid account info
+     *
+     * @return AccountInfo[]
+     */
     public function getValid()
     {
         return $this->account_info

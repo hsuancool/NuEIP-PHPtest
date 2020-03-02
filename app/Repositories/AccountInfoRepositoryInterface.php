@@ -7,6 +7,9 @@ use App\ParameterBag\CreateAccountInfoParameterBag;
 
 interface AccountInfoRepositoryInterface
 {
+    /**
+     * @return AccountInfo[]
+     */
     public function getValid();
 
     /**
