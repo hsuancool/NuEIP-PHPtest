@@ -83,4 +83,20 @@ class AccountInfoService
 
         return $account;
     }
+
+    /**
+     * @param int $account_id
+     */
+    public function deleteValidById(int $account_id)
+    {
+        if (!$account_info = $this->account_info_repo->getValidOneById($account_id)) {
+            throw new AccountInfoNotFoundException();
+        }
+
+        try {
+            $this->account_info_repo->delete($account_info);
+        } catch (QueryException $e) {
+            throw new UpdateAccountInfoFailedException($e->getMessage());
+        }
+    }
 }
