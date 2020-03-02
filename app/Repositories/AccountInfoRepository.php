@@ -88,4 +88,13 @@ class AccountInfoRepository implements AccountInfoRepositoryInterface
 
         return $account;
     }
+
+    /**
+     * @param AccountInfo $account
+     * @throws \Exception
+     */
+    public function delete(AccountInfo $account)
+    {
+        $account->delete();
+    }
 }

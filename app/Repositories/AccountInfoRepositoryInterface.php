@@ -31,4 +31,10 @@ interface AccountInfoRepositoryInterface
      * @return AccountInfo
      */
     public function updateByParameters(AccountInfo $account, UpdateAccountInfoParameterBag $parameters);
+
+    /**
+     * @param AccountInfo $account
+     * @return void
+     */
+    public function delete(AccountInfo $account);
 }
