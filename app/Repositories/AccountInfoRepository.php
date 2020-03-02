@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\AccountInfo;
+use App\ParameterBag\AccountInfoParam;
 use App\ParameterBag\CreateAccountInfoParameterBag;
 
 class AccountInfoRepository implements AccountInfoRepositoryInterface
@@ -35,12 +36,12 @@ class AccountInfoRepository implements AccountInfoRepositoryInterface
     public function createByParameters(CreateAccountInfoParameterBag $parameters)
     {
         $account = new AccountInfo();
-        $account->account = $parameters->getAccount();
-        $account->name = $parameters->getName();
-        $account->gender = $parameters->getGender();
-        $account->birth = $parameters->getBirth();
-        $account->email = $parameters->getEmail();
-        $account->message = $parameters->getMessage();
+        $account->account = $parameters->get(AccountInfoParam::ACCOUNT);
+        $account->name = $parameters->get(AccountInfoParam::NAME);
+        $account->gender = $parameters->get(AccountInfoParam::GENDER);
+        $account->birth = $parameters->get(AccountInfoParam::BIRTH);
+        $account->email = $parameters->get(AccountInfoParam::EMAIL);
+        $account->message = $parameters->get(AccountInfoParam::MESSAGE);
         $account->save();
 
         return $account;
