@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\Helper\ResponseFormatHelper;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +53,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        DB::rollBack();
+
+        switch (true) {
+            case $exception instanceof AccountInfoNotFoundException:
+                return ResponseFormatHelper::responseFailedJson(Response::HTTP_NOT_FOUND, $exception->getMessage());
+            case $exception instanceof CreateAccountInfoFailedException:
+                return ResponseFormatHelper::responseFailedJson(Response::HTTP_BAD_REQUEST, $exception->getMessage());
+            case $exception instanceof ParameterBagValidationException:
+                return ResponseFormatHelper::responseFailedJson(Response::HTTP_BAD_REQUEST, $exception->getMessage());
+            default:
+                return parent::render($request, $exception);
+        }
     }
 }
