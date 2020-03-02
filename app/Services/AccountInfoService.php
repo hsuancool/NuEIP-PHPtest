@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\CreateAccountInfoFailedException;
 use App\ParameterBag\CreateAccountInfoParameterBag;
 use App\Repositories\AccountInfoRepositoryInterface;
 use Illuminate\Database\QueryException;
@@ -48,7 +49,7 @@ class AccountInfoService
         try {
             $account = $this->account_info_repo->createByParameters($parameters)->toArray();
         } catch (QueryException $e) {
-            throw new \Exception($e->getMessage());
+            throw new CreateAccountInfoFailedException();
         }
 
         return $account;
