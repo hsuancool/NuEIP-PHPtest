@@ -47,16 +47,17 @@ class AccountInfoRepository implements AccountInfoRepositoryInterface
      */
     public function createByParameters(CreateAccountInfoParameterBag $parameters)
     {
-        $account = new AccountInfo();
-        $account->account = $parameters->get(AccountInfoParam::ACCOUNT);
-        $account->name = $parameters->get(AccountInfoParam::NAME);
-        $account->gender = $parameters->get(AccountInfoParam::GENDER);
-        $account->birth = $parameters->get(AccountInfoParam::BIRTH);
-        $account->email = $parameters->get(AccountInfoParam::EMAIL);
-        $account->message = $parameters->get(AccountInfoParam::MESSAGE);
-        $account->save();
+        $account_info = new AccountInfo();
 
-        return $account;
+        $account_info->account = $parameters->get(AccountInfoParam::ACCOUNT);
+        $account_info->name = $parameters->get(AccountInfoParam::NAME);
+        $account_info->gender = $parameters->get(AccountInfoParam::GENDER);
+        $account_info->birth = $parameters->get(AccountInfoParam::BIRTH);
+        $account_info->email = $parameters->get(AccountInfoParam::EMAIL);
+        $account_info->message = $parameters->get(AccountInfoParam::MESSAGE);
+        $account_info->save();
+
+        return $account_info;
     }
 
     /**
