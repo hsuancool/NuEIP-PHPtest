@@ -38,7 +38,7 @@
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const currentPage = (urlParams.get('page') ? parseInt(urlParams.get('page')) : 1);
-            $.getJSON('http://127.0.0.1:8000/api/nueip/accounts?page=' + currentPage, function (json) {
+            $.getJSON('http://localhost/api/nueip/accounts?page=' + currentPage, function (json) {
                 const tr = [];
                 for (let i = 0; i < json.data.accounts.length; i++) {
                     const message = ((json.data.accounts[i].message !== null) ? json.data.accounts[i].message : '');
@@ -71,18 +71,18 @@
 
                 const page = [];
                 for (let p = 1; p <= json.data.paginate.lastPage; p++) {
-                    page.push('<li class="page-item"><a class="page-link" href="/?page=' + p + '">' + p + '</a></li>')
+                    page.push('<li class="page-item ' + ((currentPage === p) ? 'active' : '') + '"><a class="page-link" href="/?page=' + p + '">' + p + '</a></li>')
                 }
                 $('#page-item-previous').after($(page.join('')));
                 if ((currentPage - 1) > 0) {
-                    $('#page-item-previous').append('<a class="page-link" href="http://127.0.0.1:8000/?page=' + (currentPage - 1) + '" aria-label="Previous">' +
+                    $('#page-item-previous').append('<a class="page-link" href="http://localhost/?page=' + (currentPage - 1) + '" aria-label="Previous">' +
                         '<span aria-hidden="true">&laquo;</span>' +
                         '<span class="sr-only">Previous</span>' +
                         '</a>');
                 }
                 console.log(json.data.paginate.lastPage);
                 if ((currentPage + 1) <= json.data.paginate.lastPage) {
-                    $('#page-item-next').append('<a class="page-link" href="http://127.0.0.1:8000/?page=' + (currentPage + 1) + '" aria-label="Next">' +
+                    $('#page-item-next').append('<a class="page-link" href="http://localhost/?page=' + (currentPage + 1) + '" aria-label="Next">' +
                         '<span aria-hidden="true">&raquo;</span>' +
                         '<span class="sr-only">Next</span>' +
                         '</a>');
@@ -96,7 +96,7 @@
             $.ajax({
                 type: "DELETE",
                 contentType: "application/json; charset=utf-8",
-                url: "http://127.0.0.1:8000/api/nueip/accounts/" + accountId,
+                url: "http://localhost/api/nueip/accounts/" + accountId,
                 cache: false,
                 beforeSend:function(){
                     return confirm("Are you sure?");
@@ -113,7 +113,7 @@
         $(document).delegate('.edit-account i', 'click', function() {
             const accountId = $(this).data('id');
 
-            $.getJSON('http://127.0.0.1:8000/api/nueip/accounts/' + accountId, function (json) {
+            $.getJSON('http://localhost/api/nueip/accounts/' + accountId, function (json) {
                 const message = json.data.message !== null ? json.data.message : '';
                 $('.modal-body .card-body').html('<form id="edit-account-form" data-id="' + accountId + '">' +
                     '<div class="row">' +
