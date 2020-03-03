@@ -31,9 +31,10 @@ abstract class BaseParameterBag extends ParameterBag
         parent::__construct($parameters);
     }
 
-    public function isValid()
+    public function isValid(array $rules = [])
     {
-        $validator = $this->validator->make($this->parameters, $this->rules());
+        $rules = $rules ?: $this->rules();
+        $validator = $this->validator->make($this->parameters, $rules);
         $this->validate_errors = $validator->errors();
 
         return !$validator->fails();
@@ -44,9 +45,11 @@ abstract class BaseParameterBag extends ParameterBag
         return $this->validate_errors->toArray();
     }
 
-    public function validate()
+    public function validate(array $rules = [])
     {
-        if (!$this->isValid()) {
+        $rules = $rules ?: $this->rules();
+
+        if (!$this->isValid($rules)) {
             throw new ParameterBagValidationException($this->errors());
         }
     }
