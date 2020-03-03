@@ -13,7 +13,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
-        "marc-mabe/php-enum": "^4.2"
+        "marc-mabe/php-enum": "^4.2",
+        "symfony/serializer": "^5.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
