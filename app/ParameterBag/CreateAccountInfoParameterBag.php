@@ -41,7 +41,7 @@ class CreateAccountInfoParameterBag extends BaseParameterBag
         return [
             AccountInfoParam::ACCOUNT => 'required|regex:/[a-zA-Z0-9]/i',
             AccountInfoParam::NAME => 'required',
-            AccountInfoParam::GENDER => 'required|in:F,M',
+            AccountInfoParam::GENDER => 'required|in:0,1',
             AccountInfoParam::BIRTH => 'required|date',
             AccountInfoParam::EMAIL => 'required|email',
         ];

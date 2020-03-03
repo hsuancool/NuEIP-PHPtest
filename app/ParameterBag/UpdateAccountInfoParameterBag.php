@@ -40,7 +40,7 @@ class UpdateAccountInfoParameterBag extends BaseParameterBag
     {
         return [
             AccountInfoParam::NAME => 'string',
-            AccountInfoParam::GENDER => 'in:F,M',
+            AccountInfoParam::GENDER => 'in:0,1',
             AccountInfoParam::BIRTH => 'date',
             AccountInfoParam::EMAIL => 'email',
         ];
