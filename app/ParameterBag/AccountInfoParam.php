@@ -6,6 +6,7 @@ use MabeEnum\Enum;
 
 class AccountInfoParam extends Enum
 {
+    const ACCOUNT_IDS = 'accountIds';
     const ACCOUNT = 'account';
     const NAME = 'name';
     const GENDER = 'gender';
