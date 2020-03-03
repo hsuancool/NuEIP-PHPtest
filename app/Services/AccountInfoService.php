@@ -6,8 +6,6 @@ use App\Exceptions\AccountInfoNotFoundException;
 use App\Exceptions\CreateAccountInfoFailedException;
 use App\Exceptions\UpdateAccountInfoFailedException;
 use App\ParameterBag\AccountInfoParameterBag;
-use App\ParameterBag\CreateAccountInfoParameterBag;
-use App\ParameterBag\UpdateAccountInfoParameterBag;
 use App\Repositories\AccountInfoRepositoryInterface;
 use App\Serializable\AccountInfoSerializer;
 use Illuminate\Database\QueryException;
@@ -62,11 +60,11 @@ class AccountInfoService extends Service
     /**
      * Create account by CreateAccountInfoParameterBag
      *
-     * @param CreateAccountInfoParameterBag $parameters
+     * @param AccountInfoParameterBag $parameters
      * @return array
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
-    public function createAccountByParameters(CreateAccountInfoParameterBag $parameters)
+    public function createAccountByParameters(AccountInfoParameterBag $parameters)
     {
         try {
             $account = $this->account_info_repo->createByParameters($parameters);
@@ -82,11 +80,11 @@ class AccountInfoService extends Service
      * Update account by UpdateAccountInfoParameterBag
      *
      * @param int $account_id
-     * @param UpdateAccountInfoParameterBag $parameters
+     * @param AccountInfoParameterBag $parameters
      * @return array
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
-    public function updateAccountByParameters(int $account_id, UpdateAccountInfoParameterBag $parameters)
+    public function updateAccountByParameters(int $account_id, AccountInfoParameterBag $parameters)
     {
         if (!$account_info = $this->account_info_repo->getValidOneById($account_id)) {
             throw new AccountInfoNotFoundException();

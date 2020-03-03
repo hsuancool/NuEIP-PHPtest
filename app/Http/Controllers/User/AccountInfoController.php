@@ -4,9 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\ParameterBag\AccountInfoParameterBag;
-use App\ParameterBag\BatchDeleteAccountInfoParameterBag;
-use App\ParameterBag\CreateAccountInfoParameterBag;
-use App\ParameterBag\UpdateAccountInfoParameterBag;
 use App\Services\AccountInfoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -61,8 +58,8 @@ class AccountInfoController extends Controller
     {
         DB::beginTransaction();
 
-        $parameters = CreateAccountInfoParameterBag::createFromRequest($request);
-        $parameters->validate();
+        $parameters = AccountInfoParameterBag::createFromRequest($request);
+        $parameters->validateCreate();
 
         $account = $this->account_info_service->createAccountByParameters($parameters);
 
@@ -82,8 +79,8 @@ class AccountInfoController extends Controller
     {
         DB::beginTransaction();
 
-        $parameters = UpdateAccountInfoParameterBag::createFromRequest($request);
-        $parameters->validate();
+        $parameters = AccountInfoParameterBag::createFromRequest($request);
+        $parameters->validateUpdate();
 
         $account = $this->account_info_service->updateAccountByParameters($account_id, $parameters);
 
