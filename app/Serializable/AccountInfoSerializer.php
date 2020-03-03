@@ -59,9 +59,27 @@ class AccountInfoSerializer
      * @Groups({"account-info"})
      * @return string
      */
+    public function getGenderId()
+    {
+        return $this->account_info->gender;
+    }
+
+    /**
+     * @Groups({"account-info"})
+     * @return string
+     */
     public function getBirth()
     {
         return date('Y年m月d日', strtotime($this->account_info->birth));
+    }
+
+    /**
+     * @Groups({"account-info"})
+     * @return string
+     */
+    public function getBirthDateTime()
+    {
+        return $this->account_info->birth;
     }
 
     /**
