@@ -49,7 +49,8 @@ class AccountInfoRepository implements AccountInfoRepositoryInterface
     {
         $account_info = new AccountInfo();
 
-        $account_info->account = $parameters->get(AccountInfoParam::ACCOUNT);
+        $account = strtolower($parameters->get(AccountInfoParam::ACCOUNT));
+        $account_info->account = $account;
         $account_info->name = $parameters->get(AccountInfoParam::NAME);
         $account_info->gender = $parameters->get(AccountInfoParam::GENDER);
         $account_info->birth = $parameters->get(AccountInfoParam::BIRTH);
