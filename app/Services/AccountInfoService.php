@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Exceptions\AccountInfoNotFoundException;
 use App\Exceptions\CreateAccountInfoFailedException;
 use App\Exceptions\UpdateAccountInfoFailedException;
+use App\ParameterBag\AccountInfoParameterBag;
 use App\ParameterBag\CreateAccountInfoParameterBag;
 use App\ParameterBag\UpdateAccountInfoParameterBag;
 use App\Repositories\AccountInfoRepositoryInterface;
@@ -112,6 +113,18 @@ class AccountInfoService extends Service
 
         try {
             $this->account_info_repo->delete($account_info);
+        } catch (QueryException $e) {
+            throw new UpdateAccountInfoFailedException($e->getMessage());
+        }
+    }
+
+    /**
+     * @param AccountInfoParameterBag $parameters
+     */
+    public function batchDeleteByParameters(AccountInfoParameterBag $parameters)
+    {
+        try {
+            $this->account_info_repo->batchDeleteByParameters($parameters);
         } catch (QueryException $e) {
             throw new UpdateAccountInfoFailedException($e->getMessage());
         }
