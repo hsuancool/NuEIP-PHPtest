@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\ParameterBag\AccountInfoParameterBag;
+use App\ParameterBag\BatchDeleteAccountInfoParameterBag;
 use App\ParameterBag\CreateAccountInfoParameterBag;
 use App\ParameterBag\UpdateAccountInfoParameterBag;
 use App\Services\AccountInfoService;
@@ -101,6 +103,26 @@ class AccountInfoController extends Controller
         DB::beginTransaction();
 
         $this->account_info_service->deleteValidById($account_id);
+
+        DB::commit();
+
+        return $this->responseSuccessJsonWithFormat([]);
+    }
+
+    /**
+     * Batch delete account info by account id
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function batchDelete(Request $request)
+    {
+        DB::beginTransaction();
+
+        $parameters = AccountInfoParameterBag::createFromRequest($request);
+        $parameters->validateBatchDelete();
+
+        $this->account_info_service->batchDeleteByParameters($parameters);
 
         DB::commit();
 

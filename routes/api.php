@@ -19,3 +19,4 @@ Route::patch('/nueip/accounts/{accountId}', 'User\AccountInfoController@update')
 Route::delete('/nueip/accounts/{accountId}', 'User\AccountInfoController@delete');
 Route::get('/nueip/accounts', 'User\AccountInfoController@list');
 Route::post('/nueip/accounts', 'User\AccountInfoController@create');
+Route::delete('/nueip/accounts', 'User\AccountInfoController@batchDelete');
