@@ -44,7 +44,15 @@ class AccountInfoService extends Service
      */
     public function getValidAccounts()
     {
-        return $this->account_info_repo->getValid()->toArray();
+        $accounts = $this->account_info_repo->getValid();
+
+        $groups = ['groups' => 'account-info'];
+        $data['accounts'] = [];
+        foreach ($accounts as $account) {
+            $data['accounts'][] = $this->serializer->normalize(new AccountInfoSerializer($account), null, $groups);
+        }
+
+        return $data;
     }
 
     /**
@@ -58,12 +66,13 @@ class AccountInfoService extends Service
     public function createAccountByParameters(CreateAccountInfoParameterBag $parameters)
     {
         try {
-            $account = $this->account_info_repo->createByParameters($parameters)->toArray();
+            $account = $this->account_info_repo->createByParameters($parameters);
         } catch (QueryException $e) {
             throw new CreateAccountInfoFailedException();
         }
 
-        return $account;
+        $groups = ['groups' => 'account-info'];
+        return $this->serializer->normalize(new AccountInfoSerializer($account), null, $groups);
     }
 
     /**
@@ -80,12 +89,13 @@ class AccountInfoService extends Service
         }
 
         try {
-            $account = $this->account_info_repo->updateByParameters($account_info, $parameters)->toArray();
+            $account = $this->account_info_repo->updateByParameters($account_info, $parameters);
         } catch (QueryException $e) {
             throw new UpdateAccountInfoFailedException($e->getMessage());
         }
 
-        return $account;
+        $groups = ['groups' => 'account-info'];
+        return $this->serializer->normalize(new AccountInfoSerializer($account), null, $groups);
     }
 
     /**
