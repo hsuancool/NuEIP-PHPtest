@@ -21,11 +21,13 @@ class AccountInfoService extends Service
         $this->account_info_repo = $account_info_repo;
     }
 
+
     /**
      * Get valid account by id
      *
      * @param int $id
      * @return array
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function getValidAccountById(int $id)
     {
@@ -41,6 +43,7 @@ class AccountInfoService extends Service
      * Get valid accounts
      *
      * @return array
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function getValidAccounts()
     {
@@ -60,8 +63,7 @@ class AccountInfoService extends Service
      *
      * @param CreateAccountInfoParameterBag $parameters
      * @return array
-     *
-     * @throws \Exception
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function createAccountByParameters(CreateAccountInfoParameterBag $parameters)
     {
@@ -81,6 +83,7 @@ class AccountInfoService extends Service
      * @param int $account_id
      * @param UpdateAccountInfoParameterBag $parameters
      * @return array
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function updateAccountByParameters(int $account_id, UpdateAccountInfoParameterBag $parameters)
     {
