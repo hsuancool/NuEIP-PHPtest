@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\AccountInfo;
+use App\ParameterBag\AccountInfoParameterBag;
 use App\ParameterBag\CreateAccountInfoParameterBag;
 use App\ParameterBag\UpdateAccountInfoParameterBag;
 
@@ -37,4 +38,10 @@ interface AccountInfoRepositoryInterface
      * @return void
      */
     public function delete(AccountInfo $account);
+
+    /**
+     * @param AccountInfoParameterBag $parameters
+     * @return void
+     */
+    public function batchDeleteByParameters(AccountInfoParameterBag $parameters);
 }

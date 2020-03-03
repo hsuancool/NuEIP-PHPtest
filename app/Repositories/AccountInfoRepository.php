@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\AccountInfo;
 use App\ParameterBag\AccountInfoParam;
+use App\ParameterBag\AccountInfoParameterBag;
 use App\ParameterBag\CreateAccountInfoParameterBag;
 use App\ParameterBag\UpdateAccountInfoParameterBag;
 
@@ -98,5 +99,14 @@ class AccountInfoRepository implements AccountInfoRepositoryInterface
     public function delete(AccountInfo $account)
     {
         $account->delete();
+    }
+
+    /**
+     * @param AccountInfoParameterBag $parameters
+     * @throws \Exception
+     */
+    public function batchDeleteByParameters(AccountInfoParameterBag $parameters)
+    {
+        $this->account_info->whereIn('id', $parameters->get(AccountInfoParam::ACCOUNT_IDS))->delete();
     }
 }
