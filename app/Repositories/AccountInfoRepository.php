@@ -29,13 +29,19 @@ class AccountInfoRepository implements AccountInfoRepositoryInterface
     /**
      * Get valid account info
      *
+     * @param int $per_page
      * @return AccountInfo[]
      */
-    public function getValid()
+    public function getValid(int $per_page = 0)
     {
-        return $this->account_info
-            ->whereNull('deleted_at')
-            ->get();
+        $account = $this->account_info
+            ->whereNull('deleted_at');
+
+        if ($per_page) {
+            return $account->paginate($per_page);
+        }
+
+        return $account->get();
     }
 
     /**

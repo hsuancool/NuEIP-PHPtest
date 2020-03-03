@@ -14,9 +14,10 @@ interface AccountInfoRepositoryInterface
     public function getValidOneById(int $id);
 
     /**
+     * @param $per_page
      * @return AccountInfo[]
      */
-    public function getValid();
+    public function getValid(int $per_page = 0);
 
     /**
      * @param AccountInfoParameterBag $parameters

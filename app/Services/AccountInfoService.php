@@ -41,18 +41,24 @@ class AccountInfoService extends Service
     /**
      * Get valid accounts
      *
+     * @param int $per_page
      * @return array
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
-    public function getValidAccounts()
+    public function getValidAccounts(int $per_page)
     {
-        $accounts = $this->account_info_repo->getValid();
+        $accounts = $this->account_info_repo->getValid($per_page);
 
         $groups = ['groups' => 'account-info'];
         $data['accounts'] = [];
         foreach ($accounts as $account) {
             $data['accounts'][] = $this->serializer->normalize(new AccountInfoSerializer($account), null, $groups);
         }
+
+        $data['paginate'] = [
+            'total' => $accounts->total(),
+            'lastPage' => $accounts->lastPage()
+        ];
 
         return $data;
     }

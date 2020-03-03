@@ -42,7 +42,10 @@ class AccountInfoController extends Controller
      */
     public function list(Request $request)
     {
-        $accounts = $this->account_info_service->getValidAccounts();
+        $page = $request->input('page', 1);
+        $per_page = $request->input('perPage', 10);
+
+        $accounts = $this->account_info_service->getValidAccounts($per_page);
 
         return $this->responseSuccessJsonWithFormat($accounts);
     }
