@@ -8,20 +8,23 @@ use App\Exceptions\UpdateAccountInfoFailedException;
 use App\ParameterBag\CreateAccountInfoParameterBag;
 use App\ParameterBag\UpdateAccountInfoParameterBag;
 use App\Repositories\AccountInfoRepositoryInterface;
+use App\Serializable\AccountInfoSerializer;
 use Illuminate\Database\QueryException;
 
-class AccountInfoService
+class AccountInfoService extends Service
 {
     protected $account_info_repo;
 
     public function __construct(AccountInfoRepositoryInterface $account_info_repo)
     {
+        parent::__construct();
         $this->account_info_repo = $account_info_repo;
     }
 
     /**
      * Get valid account by id
      *
+     * @param int $id
      * @return array
      */
     public function getValidAccountById(int $id)
@@ -30,7 +33,8 @@ class AccountInfoService
             throw new AccountInfoNotFoundException();
         }
 
-        return $account->toArray();
+        $groups = ['groups' => 'account-info'];
+        return $this->serializer->normalize(new AccountInfoSerializer($account), null, $groups);
     }
 
     /**
