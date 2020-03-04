@@ -3,6 +3,7 @@
 * Laravel Framework Version: 6.17.1
 * Database: MySQL 5.7
 
+## Getting Started
 ### Prerequisites
 
 - Download and install [Docker for Mac](https://download.docker.com/mac/stable/Docker.dmg)
