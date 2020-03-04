@@ -12,6 +12,7 @@
     git clone https://github.com/hsuancool/NuEIP-PHPtest.git
     
 ### Step 2 - Submodule
+    cd NuEIP-PHPtest
     git submodule init
     git submodule update
   
